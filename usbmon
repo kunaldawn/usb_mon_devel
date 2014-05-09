@@ -1,0 +1,100 @@
+#!/usr/bin/python
+
+##########################################################################
+# USB MON v0.3 devel
+# Copyright (C) 2014  Kunal Dawn <kunal.dawn@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##########################################################################
+import usb
+from usb.core import USBError
+import time
+import signal
+import sys
+import subprocess
+import os
+
+def _clean_str(s):
+    return ''.join([c for c in s if c.isalnum() or c in {' '}])
+
+
+def _get_dev_string_info(device):
+    str_info = ""
+    try:
+        str_info = _clean_str(usb.util.get_string(device, 256, 2))
+        str_info += ' ' + _clean_str(usb.util.get_string(device, 256, 3))
+        return str_info
+    except USBError:
+        return str_info
+    
+def get_usb_devices():
+    return [(device.idVendor, device.idProduct, _get_dev_string_info(device)) 
+                for device in usb.core.find(find_all=True)
+                    if device.idProduct > 2]
+        
+class USBCORE(object):
+    def __init__(self, vendor_id=0, product_id=0,command = "", check_interval=0.5):
+        self.check_interval = check_interval
+        self.isRunning = False
+        self.vendor_id = vendor_id
+        self.product_id = product_id
+        self.process = 0
+        self.command = command
+
+    def is_disconnected(self):
+        return not usb.core.find(idVendor = int(self.vendor_id), idProduct = int(self.product_id))
+
+    def is_connected(self):
+        return usb.core.find(idVendor = int(self.vendor_id), idProduct = int(self.product_id))
+
+    def run(self):
+        while True:
+            if self.is_disconnected() and self.isRunning:
+                print "Stopping Process"
+                os.killpg(self.process.pid, signal.SIGTERM)
+                self.isRunning = False
+            if self.is_connected() and not self.isRunning:
+                print "Starting Process for USB Device"
+                self.process = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, preexec_fn=os.setsid)
+                self.isRunning = True
+            time.sleep(self.check_interval)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print "=================================================="
+        print "Available USB Devices"
+        print "=================================================="
+        devices = get_usb_devices()
+        count = 1
+        for d in devices:
+            print 'ID[',count,']    VENDOR[',d[0],']    PRODUCT[',d[1],']    NAME[',d[2],']'
+        print "=================================================="
+	print "usage : %s vendor_id product_id command" % sys.argv[0]
+        sys.exit(0)
+
+    def signal_handler(signal, frame):
+        print 'You Pressed CTRL+C'
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
+
+    print "=================================================="
+    print "Monitoring USB device[",sys.argv[1],",",sys.argv[2],"]... (Press CTRL+C for exit)"
+    print "Command [",sys.argv[3],"] will be invoked according to USB device availability..."
+    print "=================================================="
+    core = USBCORE(vendor_id=sys.argv[1],product_id=sys.argv[2], command = sys.argv[3])
+    core.run()
+
