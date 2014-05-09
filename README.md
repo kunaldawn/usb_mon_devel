@@ -5,41 +5,42 @@ A small tool to
 - Start/Stop a process when particular usb device is attached or detached
 
 ### Usage :
-Make it executable</br>
-$chmod +x usbmon</br>
+Make it executable  
+$chmod +x usbmon  
 
-To list all available devices just run </br>
-"$usbmon".
+To list all available devices just run  
+$usbmon
 
-Example : $ ./usbmon</br>
-Available USB Devices</br>
-ID[ 1 ]    VENDOR[ 1133 ]    PRODUCT[ 49176 ]    NAME[  ]</br>
-ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 149 ]    NAME[  ]</br>
-ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 21930 ]    NAME[  ]</br>
-ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]</br>
-ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]</br>
-usage : ./usbmon vendor_id product_id command interval</br>
+Example : $ ./usbmon  
+Available USB Devices  
+ID[ 1 ]    VENDOR[ 1133 ]    PRODUCT[ 49176 ]    NAME[  ]  
+ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 149 ]    NAME[  ]  
+ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 21930 ]    NAME[  ]  
+ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]  
+ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]  
+usage : ./usbmon vendor_id product_id command interval  
 
-To run a command/script/program on specified usb device is attached or detached just run </br>
-"$usbmon vendor_id product_id command scan_interval"
+To run a command/script/program on specified usb device is attached or detached just run  
+$usbmon vendor_id product_id command scan_interval
 
-Example : "$usbmon XXXX XXXX gedit 0.5", </br>
-will summon gedit when ever usb device is attached and will close already opened gedit when ever usb device is detached with specified ids. 
+Example : "$usbmon XXXX XXXX gedit 0.5"  
+will summon gedit when ever usb device is attached and   
+will close already opened gedit when ever usb device is detached with specified ids. 
 
-$ ./usbmon 1133 49176 /usr/bin/wireshark 0.1</br>
-Monitoring USB device[ 1133 , 49176 ]... (Press CTRL+C for exit)</br>
-Command [ /usr/bin/wireshark ] will be invoked according to USB device availability...</br>
-Starting Process for USB Device</br>
-Stopping Process</br>
-Starting Process for USB Device</br>
-Stopping Process</br>
-Starting Process for USB Device</br>
-Stopping Process</br>
-Starting Process for USB Device</br>
-You Pressed CTRL+C</br>
+$ ./usbmon 1133 49176 /usr/bin/wireshark 0.1  
+Monitoring USB device[ 1133 , 49176 ]... (Press CTRL+C for exit)  
+Command [ /usr/bin/wireshark ] will be invoked according to USB device availability...  
+Starting Process for USB Device  
+Stopping Process  
+Starting Process for USB Device  
+Stopping Process  
+Starting Process for USB Device  
+Stopping Process  
+Starting Process for USB Device  
+You Pressed CTRL+C  
 
 ### Dependency
-Depends on PyUSB module. < http://sourceforge.net/projects/pyusb/ >
+Depends on [PyUSB](http://sourceforge.net/projects/pyusb/) module.
 
 ### LICENSE : GPLv3, 29 June 2007 
 USB MON v0.3 devel
