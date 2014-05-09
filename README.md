@@ -8,18 +8,14 @@ A small tool to
 Make it executable
 $chmod +x usbmon
 
-To list all available devices just run
-$usbmon
+To list all available devices just run "$usbmon"
 
-To run a command/script/program on specified usb device is attached or detached just run
-$usbmon vendor_id product_id command
+To run a command/script/program on specified usb device is attached or detached just run "$usbmon vendor_id product_id command"
 
-example:
-$usbmon XXXX XXXX gedit
-Will summon gedit when ever usb device is attached and will close already opened gedit when ever usb device is detached with specified ids. 
+Example : "$usbmon XXXX XXXX gedit", will summon gedit when ever usb device is attached and will close already opened gedit when ever usb device is detached with specified ids. 
 
 ### Dependency
-Depends on PyUSB < http://sourceforge.net/projects/pyusb/ >
+Depends on PyUSB module. < http://sourceforge.net/projects/pyusb/ >
 
 ### LICENSE : GPLv3, 29 June 2007 
 USB MON v0.3 devel
