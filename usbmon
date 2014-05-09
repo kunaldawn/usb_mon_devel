@@ -81,6 +81,7 @@ if __name__ == '__main__':
         count = 1
         for d in devices:
             print 'ID[',count,']    VENDOR[',d[0],']    PRODUCT[',d[1],']    NAME[',d[2],']'
+            count = count + 1;
         print "=================================================="
 	print "usage : %s vendor_id product_id command interval" % sys.argv[0]
         sys.exit(0)

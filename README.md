@@ -13,11 +13,11 @@ $usbmon
 
 Example : $ ./usbmon  
 Available USB Devices  
-ID[ 1 ]    VENDOR[ 1133 ]    PRODUCT[ 49176 ]    NAME[  ]  
-ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 149 ]    NAME[  ]  
-ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 21930 ]    NAME[  ]  
-ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]  
-ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]  
+ID[ 1 ]    VENDOR[ 1133 ]    PRODUCT[ 49176 ]    NAME[ USB Optical Mouse ]  
+ID[ 2 ]    VENDOR[ 1033 ]    PRODUCT[ 149 ]    NAME[ small JPN USB KBD Keyboard ]  
+ID[ 3 ]    VENDOR[ 1033 ]    PRODUCT[ 21930 ]    NAME[  ]  
+ID[ 4 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]  
+ID[ 5 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]  
 usage : ./usbmon vendor_id product_id command interval  
 
 To run a command/script/program on specified usb device is attached or detached just run  
