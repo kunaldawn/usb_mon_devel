@@ -8,11 +8,37 @@ A small tool to
 Make it executable
 $chmod +x usbmon
 
-To list all available devices just run "$usbmon"
+To list all available devices just run "$usbmon".
 
-To run a command/script/program on specified usb device is attached or detached just run "$usbmon vendor_id product_id command"
+Example : $ ./usbmon
+==================================================
+Available USB Devices
+==================================================
+ID[ 1 ]    VENDOR[ 1133 ]    PRODUCT[ 49176 ]    NAME[  ]
+ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 149 ]    NAME[  ]
+ID[ 1 ]    VENDOR[ 1033 ]    PRODUCT[ 21930 ]    NAME[  ]
+ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]
+ID[ 1 ]    VENDOR[ 32903 ]    PRODUCT[ 36 ]    NAME[  ]
+==================================================
+usage : ./usbmon vendor_id product_id command interval
 
-Example : "$usbmon XXXX XXXX gedit", will summon gedit when ever usb device is attached and will close already opened gedit when ever usb device is detached with specified ids. 
+To run a command/script/program on specified usb device is attached or detached just run "$usbmon vendor_id product_id command scan_interval"
+
+Example : "$usbmon XXXX XXXX gedit 0.5", will summon gedit when ever usb device is attached and will close already opened gedit when ever usb device is detached with specified ids. 
+
+$ ./usbmon 1133 49176 /usr/bin/wireshark 0.1
+==================================================
+Monitoring USB device[ 1133 , 49176 ]... (Press CTRL+C for exit)
+Command [ /usr/bin/wireshark ] will be invoked according to USB device availability...
+==================================================
+Starting Process for USB Device
+Stopping Process
+Starting Process for USB Device
+Stopping Process
+Starting Process for USB Device
+Stopping Process
+Starting Process for USB Device
+You Pressed CTRL+C
 
 ### Dependency
 Depends on PyUSB module. < http://sourceforge.net/projects/pyusb/ >
